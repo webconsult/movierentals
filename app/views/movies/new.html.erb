@@ -1,0 +1,25 @@
+Enter new movie information: <br>
+<%= form_for(@movie) do |f| -%>
+<%= f.text_field :title %> <br>
+<%= f.text_field :year  %> <br>
+<%= f.submit %>
+<% end -%>
+<hr>
+
+<% if !@movies.blank?  %>
+List of all movies
+	<table border="1">
+		<tr>
+			<th>Title</th>
+			<th>Year</th>
+		</tr>
+		<% @movies.each do |movie| %>
+			<tr>
+				<td> <%= link_to movie.title, :controller => :rentals, :action => :new, :id => movie.id %></td>
+				<td><%= movie.year  %></td>
+			</tr>
+		<% end -%>
+	</table>
+<% else %>
+	No movies yet
+<% end -%>

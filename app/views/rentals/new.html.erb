@@ -1,0 +1,15 @@
+Movie <%= @movie.title  %> (<%= link_to "back", new_movie_path %>)
+<hr>
+<% form_for @rental, :url => {:action => :create, :id => @movie.id} do |f| -%>
+  Borrowed on: <%= f.label :borrowed_on %> <br>
+  Returned on: <%= f.label :returned_on %> <br>
+	<%= f.submit  %>
+<% end -%>
+<hr>
+<% if !@movie.rentals.exists? %>
+  <% for item in @movie.rentals %>
+    <%= item.borrowed_on  %>, <%= item.returned_on  %> <br>
+  <% end %>
+<% else %>
+  No rentals yet
+<% end %>
